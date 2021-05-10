@@ -1,0 +1,110 @@
+_____________________________________________
+
+Drugs Data acquisition using Beautiful Soup:
+_____________________________________________
+
+Table of Contents:
+
+1.0 Introduction
+2.0 How the data was collected
+3.0 Data Tables
+4.0 Preprocessing
+5.0 Future Challenges and Limitations
+6.0 Prerequisites to run this tool
+
+
+1.0 Introduction
+----------------
+This data set is a collection of actual data from Medlinplus platform, it contains the data of all the drugs with descriptions.
+    
+This data was collected with the idea that it can be used to acquire the knowledge about the medical drug data, correct procedure to use the drug, knowledge about other use of it, precautions to be taken while using the drug and also its side effects.
+
+
+2.0 How the data was collected
+------------------------------
+
+This data was collected through Web Scrapping using Beautiful Soup. To build these data sets we had to web scrap from Medlineplus websites.
+
+https://medlineplus.gov/
+ 
+The weblink had A-z data and each drugs detail data were in different data source page, so first we collected the A-Z list in the CSV file which includes drug brand name, drug composition name, scarped link of each drug and we updated the incomplete link by attaching the header "https://medlineplus.gov/druginfo/"
+
+once we collected all the lists of drugs with its link, we are fetching each link from the csv file and requesting the website, form there we are scraping the website by collecting all required variables and saving all the data in another csv file.
+
+
+3.0 Data Tables
+---------------
+
+we are providing two csv files, one with the drug name and its respective links and another with all the content of the drug.
+
+Two csv files are:
+
+project_new_updated.csv
+project_main_data.csv
+
+-> project_new_updated.csv has columns:
+
+brand_name: Brand name of the drug
+med_name: composition name of the drug 
+med_link: link of drug obtained using web scraping
+updated_link: "https://medlineplus.gov/druginfo/" was appended to the med_link
+
+-> project_main_data.csv has columns:
+
+Med_name: composition name of the drug 
+Why is this medication prescribed?: explains why this drug is used
+How should this medicine be used?: gives the information how this drug should be used
+Other uses for this medicine: tells whether there is any other use of drug
+What special precautions should I follow?: explains how this drug should be taken if any special precautions is there 
+What side effects can this medication cause?: gives information about the side effects of this drug 
+In case of emergency/overdose: this column provides the information about how to save anyone if they are in emergency situation or if the drug was taken overdose
+
+
+4.0 Future Challenges and Limitations
+-------------------------------------
+
+ Challenges and its solutions:
+
+while collecting the links for A-Z drug data, the link we got was incomplete without a header protocol, so we added the remaining path and saved in a different column in the csv file.  
+     
+The website had a request policy which is 85 requests per minute per IP address, if this policy is breached the website will stop to    provide the service 
+
+Some of the drug data were missing in the website, because of this out code was crashing so to solve this we added the exceptional handling concept so that if some variable data is missing then that variable will be skipped and assigned NA to it.
+
+Note: Before starting the project implementation we planned to scrap the another website "goodrx" which is a pretty good website with all the data in standard format and also this website had a price variable which gives the price of each drug by comparing all the pharmacy nearby.
+
+But the main challenge was this website dint allow us to scrap thou there was no information for not scarping in its user policy or terms and conditions.
+
+because of this issue we researched other website which had similar type of data, and we came across medlineplus which is a government aided website
+ 
+ Limitations:
+ some data has no value, and some drugs are wrapped with protected data / encrypted with which we were not able to scrap the data.
+ 
+5.0 Preprocessing
+-----------------
+
+This tool/code can provide the set of all the drugs related to particular illness for example
+if the illness/ keyword is "fever" this code gives all the drug which cures the fever.
+
+5.1 Analyzing
+-------------
+
+This data set can be used to analyze the side effects of different drugs. 
+
+6.0 Prerequisites to run this tool
+----------------------------------
+
+python3 should be installed.
+install Beautiful soup package
+install the requests package 
+install the lxml package (why because it’s Very fast and Lenient than Html.parser)
+
+To install the packages:
+open the command line and run the below commands
+
+pip install BeautifulSoup4
+pip install requests
+pip install lxml 
+
+for more details on installing the package please refer the below link.
+https://packaging.python.org/tutorials/installing-packages/#installing-from-pypi
